@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Zulfiqar | Android & Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.0/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontsource-jetbrains-mono@5.0.0/index.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#06b6d4',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        card: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(ellipse at top, rgba(6,182,212,0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(139,92,246,0.1) 0%, transparent 50%),
+                        #020617;
+        }
+        
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(6,182,212,0.2);
+        }
+        
+        .project-card {
+            transition: all 0.4s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+            border: 3px solid #0f172a;
+            z-index: 10;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #06b6d4, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #06b6d4;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #06b6d4, #8b5cf6); 
+            border-radius: 4px;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-darker text-gray-200 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-darker/80 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#home" class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-lg">
+                        AZ
+                    </div>
+                    <span class="font-bold text-white hidden sm:block">Ahmad<span class="text-primary">.</span></span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-sm text-gray-300 hover:text-white transition">Home</a>
+                    <a href="#about" class="nav-link text-sm text-gray-300 hover:text-white transition">About</a>
+                    <a href="#skills" class="nav-link text-sm text-gray-300 hover:text-white transition">Skills</a>
+                    <a href="#experience" class="nav-link text-sm text-gray-300 hover:text-white transition">Experience</a>
+                    <a href="#projects" class="nav-link text-sm text-gray-300 hover:text-white transition">Projects</a>
+                    <a href="#contact" class="nav-link text-sm text-gray-300 hover:text-white transition">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#contact" class="px-5 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg text-sm font-medium hover:opacity-90 transition">
+                        Hire Me
+                    </a>
+                </div>
+                
+                <button id="menuBtn" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full bg-card z-50 p-6 md:hidden">
+        <button id="closeMenu" class="absolute top-4 right-4 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="mt-16 flex flex-col gap-6">
+            <a href="#home" class="mobile-link text-lg text-gray-300 hover:text-primary transition">Home</a>
+            <a href="#about" class="mobile-link text-lg text-gray-300 hover:text-primary transition">About</a>
+            <a href="#skills" class="mobile-link text-lg text-gray-300 hover:text-primary transition">Skills</a>
+            <a href="#experience" class="mobile-link text-lg text-gray-300 hover:text-primary transition">Experience</a>
+            <a href="#projects" class="mobile-link text-lg text-gray-300 hover:text-primary transition">Projects</a>
+            <a href="#contact" class="mobile-link text-lg text-gray-300 hover:text-primary transition">Contact</a>
+            <a href="#contact" class="mt-4 px-5 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg text-center font-medium">Hire Me</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg grid-bg min-h-screen flex items-center relative overflow-hidden pt-16">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-primary font-mono">Available for work</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+                        Hi, I'm <span class="gradient-text">Ahmad Zulfiqar</span>
+                    </h1>
+                    
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="text-xl sm:text-2xl text-gray-300 font-mono typing-cursor" id="typingText"></span>
+                    </div>
+                    
+                    <p class="text-gray-400 text-lg mb-8 max-w-xl leading-relaxed">
+                        Android & Web Developer with strong expertise in building responsive, user-focused applications. 
+                        I craft clean code and deliver secure, scalable, high-performance solutions.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium hover:opacity-90 transition flex items-center gap-2">
+                            <i class="fas fa-rocket"></i> View Projects
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-white/20 text-white rounded-lg font-medium hover:bg-white/5 transition flex items-center gap-2">
+                            <i class="fas fa-envelope"></i> Contact Me
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <a href="https://linkedin.com/in/ahmad-zulfiqar-b21a8b26b/" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                            <i class="fab fa-linkedin-in text-gray-400 hover:text-primary"></i>
+                        </a>
+                        <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                            <i class="fab fa-github text-gray-400 hover:text-primary"></i>
+                        </a>
+                        <a href="mailto:ahmadzulfiqar6688@gmail.com" class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                            <i class="fas fa-envelope text-gray-400 hover:text-primary"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="relative floating">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl blur-2xl opacity-30"></div>
+                            <img 
+                            src="ahmmad.png" 
+                            alt="Ahmad Zulfiqar" 
+                            class="relative rounded-3xl border border-white/10 shadow-2xl w-full"
+                        >
+                    </div>
+                    
+                    <!-- Floating badges -->
+                    <div class="absolute -top-4 -left-4 bg-card border border-white/10 rounded-xl p-3 shadow-xl" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                                <i class="fab fa-java text-orange-500"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Expert in</div>
+                                <div class="text-sm font-bold text-white">Java</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-4 -right-4 bg-card border border-white/10 rounded-xl p-3 shadow-xl" data-aos="zoom-in" data-aos-delay="700">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <i class="fab fa-laravel text-red-500"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400">Skilled in</div>
+                                <div class="text-sm font-bold text-white">Laravel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// About Me</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Get To Know Me</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl"></div>
+                            <img src="../ahmmad.png" 
+                                alt="Ahmad Zulfiqar" 
+                             class="relative rounded-2xl border border-white/10 w-full">
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-white mb-4">
+                        A Passionate Developer Based in <span class="gradient-text">Bahawalpur, Pakistan</span>
+                    </h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I'm an Android & Web Developer with strong expertise in mobile and web application development. 
+                        I'm experienced in building responsive, user-focused applications using Java, Android Studio, XML, 
+                        Firebase, HTML, CSS, Bootstrap, PHP, Laravel, and MySQL.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I'm skilled in database integration, API development, responsive UI design, and delivering secure, 
+                        scalable, and high-performance solutions. I also have experience in computer operations and office support, 
+                        with a strong focus on clean code, usability, and efficient problem-solving.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="text-gray-300">Clean Code</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="text-gray-300">Responsive Design</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="text-gray-300">API Development</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="text-gray-300">Database Integration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium hover:opacity-90 transition">
+                            Let's Talk
+                        </a>
+                        <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="px-6 py-3 border border-white/20 text-white rounded-lg font-medium hover:bg-white/5 transition flex items-center gap-2">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-darker grid-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// My Skills</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Technical Expertise</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Android Development -->
+                <div class="skill-card bg-card border border-white/5 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fab fa-android text-3xl text-orange-500"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Android Development</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Java
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Android Studio
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> XML
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Firebase
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> API Integration
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Web Development -->
+                <div class="skill-card bg-card border border-white/5 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-3xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Web Development</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> HTML / CSS
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Bootstrap
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> PHP
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Laravel
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> MySQL
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Programming -->
+                <div class="skill-card bg-card border border-white/5 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-terminal text-3xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Programming</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Java
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> PHP
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Python
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> OOP Concepts
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Data Structures
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Tools & Others -->
+                <div class="skill-card bg-card border border-white/5 rounded-2xl p-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-tools text-3xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Tools & Others</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> VS Code
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> GitHub
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Computer Operations
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Data Entry
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-400">
+                            <i class="fas fa-angle-right text-primary text-xs"></i> Documentation
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// My Journey</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Work Experience</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary to-secondary"></div>
+                
+                <!-- Experience 1 -->
+                <div class="relative mb-12 md:grid md:grid-cols-2 md:gap-8" data-aos="fade-right">
+                    <div class="md:text-right md:pr-12 timeline-item md:after:content-['']">
+                        <div class="bg-card border border-white/5 rounded-2xl p-6 hover:border-primary/30 transition">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full mb-3">
+                                <i class="fas fa-calendar text-primary text-xs"></i>
+                                <span class="text-xs text-primary font-mono">2024 – 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Android Developer</h3>
+                            <p class="text-primary text-sm mb-3 font-medium">Center for Advanced Solutions</p>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-primary text-xs mt-1"></i>
+                                    <span>Built responsive and user-friendly mobile interfaces with a focus on performance and usability</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-primary text-xs mt-1"></i>
+                                    <span>Applied clean coding practices, debugging, and performance optimization throughout the development process</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="relative mb-12 md:grid md:grid-cols-2 md:gap-8" data-aos="fade-left">
+                    <div class="md:col-start-2 md:pl-12 timeline-item">
+                        <div class="bg-card border border-white/5 rounded-2xl p-6 hover:border-primary/30 transition">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 rounded-full mb-3">
+                                <i class="fas fa-calendar text-secondary text-xs"></i>
+                                <span class="text-xs text-secondary font-mono">2025 – 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Web Developer</h3>
+                            <p class="text-secondary text-sm mb-3 font-medium">Glims Technologies (Pvt.) Ltd.</p>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-secondary text-xs mt-1"></i>
+                                    <span>Developed a professional e-commerce web store with responsive interface and product management</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-secondary text-xs mt-1"></i>
+                                    <span>Delivered user-friendly, mobile-responsive websites with focus on performance and clean code</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-secondary text-xs mt-1"></i>
+                                    <span>Database integration and user-friendly shopping functionality implementation</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-darker grid-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// My Work</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Featured Projects</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+                    Showcasing my best work in Android and Web Development
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Project 1: E-Commerce Website -->
+                <div class="project-card bg-card border border-white/5 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://image.qwenlm.ai/public_source/47ec9cf4-7a59-4587-bcdf-5c2fddc4a877/1a7f5b3d9-0a31-4856-ae5d-dd64c1c557fe.png" 
+                             alt="E-Commerce Website" 
+                             class="project-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-primary/90 rounded-full text-xs font-medium text-white">
+                            Web Development
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-shopping-cart text-primary"></i>
+                            <span class="text-xs text-primary font-mono">Laravel + PHP + MySQL</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">E-Commerce Website</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                            A professional e-commerce platform with a responsive interface, product management, 
+                            database integration, and user-friendly shopping functionality. Built with Laravel, 
+                            PHP, and MySQL for a complete shopping experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Laravel</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">PHP</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">MySQL</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Bootstrap</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Responsive</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+                            <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2: Mobile Apps -->
+                <div class="project-card bg-card border border-white/5 rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://image.qwenlm.ai/public_source/47ec9cf4-7a59-4587-bcdf-5c2fddc4a877/1b7503cd0-7869-40a9-b02b-c83c1776e32b.png" 
+                             alt="Mobile Apps" 
+                             class="project-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-secondary/90 rounded-full text-xs font-medium text-white">
+                            Android Development
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fab fa-android text-secondary"></i>
+                            <span class="text-xs text-secondary font-mono">Java + Android Studio + Firebase</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Professional Mobile Apps</h3>
+                        <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                            Designed and implemented multiple professional, user-friendly mobile UI screens with 
+                            a focus on responsive design and usability. Built with Java and Android Studio, 
+                            featuring Firebase integration for real-time data and authentication.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Java</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Android Studio</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">XML</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Firebase</span>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">UI/UX</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+                            <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="flex items-center gap-2 text-sm text-gray-400 hover:text-primary transition">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="py-20 bg-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// Education</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Academic Background</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="bg-card border border-white/5 rounded-2xl p-6 hover:border-primary/30 transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-graduation-cap text-2xl text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full mb-2">
+                                <i class="fas fa-calendar text-primary text-xs"></i>
+                                <span class="text-xs text-primary font-mono">2022 – 2026</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1">Bachelor of Science in IT</h3>
+                            <p class="text-gray-400 text-sm">Islamia University of Bahawalpur</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-card border border-white/5 rounded-2xl p-6 hover:border-primary/30 transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-school text-2xl text-secondary"></i>
+                        </div>
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 rounded-full mb-2">
+                                <i class="fas fa-calendar text-secondary text-xs"></i>
+                                <span class="text-xs text-secondary font-mono">2020 – 2022</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1">ICS (Computer, Math, Physics)</h3>
+                            <p class="text-gray-400 text-sm">Govt. Shouhada-e-APS Memorial H/SS, Bahawalpur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Languages -->
+            <div class="mt-12 max-w-3xl mx-auto" data-aos="fade-up">
+                <h3 class="text-center text-lg font-bold text-white mb-6">Languages</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="px-6 py-3 bg-card border border-white/5 rounded-xl flex items-center gap-3">
+                        <i class="fas fa-language text-primary"></i>
+                        <span class="text-gray-300">English</span>
+                    </div>
+                    <div class="px-6 py-3 bg-card border border-white/5 rounded-xl flex items-center gap-3">
+                        <i class="fas fa-language text-primary"></i>
+                        <span class="text-gray-300">Urdu</span>
+                    </div>
+                    <div class="px-6 py-3 bg-card border border-white/5 rounded-xl flex items-center gap-3">
+                        <i class="fas fa-language text-primary"></i>
+                        <span class="text-gray-300">Saraiki</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-darker grid-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-mono text-sm tracking-wider uppercase">// Get In Touch</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Let's Work Together</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
+                    Have a project in mind? Let's discuss how I can help bring your ideas to life.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <div class="bg-card border border-white/5 rounded-2xl p-8 h-full">
+                        <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                        <p class="text-gray-400 mb-8">
+                            Feel free to reach out through any of the following channels. I'm always open to discussing new projects and opportunities.
+                        </p>
+                        
+                        <div class="space-y-5">
+                            <a href="mailto:ahmadzulfiqar6688@gmail.com" class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-primary/10 transition group">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">Email</div>
+                                    <div class="text-white text-sm">ahmadzulfiqar6688@gmail.com</div>
+                                </div>
+                            </a>
+                            
+                            <a href="tel:+923011090515" class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-primary/10 transition group">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">Phone</div>
+                                    <div class="text-white text-sm">+92 301 1090515</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://linkedin.com/in/ahmad-zulfiqar-b21a8b26b/" target="_blank" class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-primary/10 transition group">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fab fa-linkedin-in text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">LinkedIn</div>
+                                    <div class="text-white text-sm">ahmad-zulfiqar-b21a8b26b</div>
+                                </div>
+                            </a>
+                            
+                            <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-primary/10 transition group">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                    <i class="fab fa-github text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">GitHub</div>
+                                    <div class="text-white text-sm">ahmadzulfiqar24</div>
+                                </div>
+                            </a>
+                            
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-xl">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">Location</div>
+                                    <div class="text-white text-sm">Bahawalpur, Pakistan</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div data-aos="fade-left">
+                    <form id="contactForm" class="bg-card border border-white/5 rounded-2xl p-8 h-full">
+                        <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Your Name</label>
+                                <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:border-primary focus:outline-none transition" placeholder="John Doe">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Your Email</label>
+                                <input type="email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:border-primary focus:outline-none transition" placeholder="john@example.com">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Subject</label>
+                                <input type="text" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:border-primary focus:outline-none transition" placeholder="Project Discussion">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Message</label>
+                                <textarea required rows="4" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:border-primary focus:outline-none transition resize-none" placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-medium hover:opacity-90 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker border-t border-white/5 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-sm">
+                        AZ
+                    </div>
+                    <span class="text-white font-bold">Ahmad Zulfiqar</span>
+                </div>
+                
+                <p class="text-gray-500 text-sm">
+                    © 2026 Ahmad Zulfiqar. All rights reserved.
+                </p>
+                
+                <div class="flex items-center gap-3">
+                    <a href="https://linkedin.com/in/ahmad-zulfiqar-b21a8b26b/" target="_blank" class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                        <i class="fab fa-linkedin-in text-sm text-gray-400 hover:text-primary"></i>
+                    </a>
+                    <a href="https://github.com/ahmadzulfiqar24/" target="_blank" class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                        <i class="fab fa-github text-sm text-gray-400 hover:text-primary"></i>
+                    </a>
+                    <a href="mailto:ahmadzulfiqar6688@gmail.com" class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition">
+                        <i class="fas fa-envelope text-sm text-gray-400 hover:text-primary"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-primary to-secondary text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 z-40">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+        
+        // Typing effect
+        const typingTexts = ['Android Developer', 'Web Developer', 'Java Expert', 'Laravel Developer'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typingText');
+        
+        function typeEffect() {
+            const currentText = typingTexts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let speed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typingTexts.length;
+                speed = 500;
+            }
+            
+            setTimeout(typeEffect, speed);
+        }
+        
+        typeEffect();
+        
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            btn.classList.add('bg-green-500');
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-green-500');
+                this.reset();
+            }, 3000);
+        });
+        
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-primary');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
